@@ -1,3 +1,8 @@
+/*
+ * Autores: Fernando Dutra, Heitor Gonçalez
+ * Data: 17/05/2023
+ */
+
 package leituraarquivo;
 
 import java.nio.charset.StandardCharsets;
