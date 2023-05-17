@@ -24,7 +24,7 @@ public class LeituraDados {
     public static void main(String[] args) throws Exception {
 
         // criação do arquivo de texto
-        arquivo = Paths.get("C:\\_dev\\Java\\ExercicioLeitura\\src\\arquivo.txt");
+        arquivo = Paths.get("./src/arquivo.txt");
 
         // verifica se o arquivo existe, se existir ele é deletado para ser criado
         // novamente
@@ -60,7 +60,7 @@ public class LeituraDados {
 
                         // Verifica se a linha possui ja passou no looping de entrada
                         // caso a linha exista o conteudo é substituido pelo novo dado
-                        if (cont - 1 < posicao) {
+                        if (i - 1 < posicao) {
                             System.out.println("Linha não existe no registro");
                             erro = true;
                             i--;
@@ -107,8 +107,7 @@ public class LeituraDados {
     // atribui os dados digitados a variavel mensagem
     public static void atribuir() {
         for (int i = 0; i < cont; i++) {
-            if (dados[i] != null && !(dados[i].equals("//FIM"))
-                    && !(dados[i].substring(0, dados[i].length() - 2).equals("//EDITAR"))) {
+            if (dados[i] != null && !(dados[i].equals("//FIM")) && !(dados[i].substring(0, dados[i].length() - 2).equals("//EDITAR"))) {
                 mensagem += dados[i] + "\n";
             }
         }
@@ -118,8 +117,7 @@ public class LeituraDados {
     public static void print(String[] vetor) {
         System.out.println();
         for (int i = 0; i < vetor.length; i++) {
-            if (vetor[i] != null && !(vetor[i].equals("//FIM"))
-                    && !(vetor[i].substring(0, dados[i].length() - 2).equals("//EDITAR"))) {
+            if (vetor[i] != null && !(vetor[i].equals("//FIM")) && !(vetor[i].substring(0, dados[i].length() - 2).equals("//EDITAR"))) {
                 System.out.println(i + ": " + vetor[i]);
             }
         }
