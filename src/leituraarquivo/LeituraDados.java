@@ -1,5 +1,5 @@
 /*
- * Autores: Fernando Dutra, Heitor Gonçalez
+ * Autores: Fernando Dutra de Oliveira, Heitor Gonçalez Bovi
  * Data: 17/05/2023
  */
 
