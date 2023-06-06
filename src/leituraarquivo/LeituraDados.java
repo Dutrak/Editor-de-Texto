@@ -10,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LeituraDados {
 
@@ -21,7 +23,7 @@ public class LeituraDados {
     public static boolean erro = false;
     public static String[] dados = new String[200];
     public static int index;
-    public static String[] dadosold = new String[200];
+    public static List<String> dadosold = new ArrayList<String>();
 
     public static void main(String[] args) throws Exception {
 
@@ -34,24 +36,26 @@ public class LeituraDados {
         System.out.println("COMANDOS: //FIM e //EDITAR");
         System.out.println();
 
-
         // verifica se o arquivo existe
-        if (Files.exists(arquivo)){
-            // se o arquivo existir, ele é lido e seus dados são guardados em um vetor auxiliar
-            dadosold = Files.readAllLines(arquivo).toArray(new String[0]);
-            // o index recebe o tamanho do vetor auxiliar
-            index = dadosold.length;
-            // printa os dados do vetor auxiliar e atribui ao vetor de dados principais
-            for (int i = 0; i < dadosold.length; i++) {
-                System.out.println(i + ": " + dadosold[i]);
-                dados[i] = dadosold[i];
-            }
+        if (Files.exists(arquivo)) {
+            // se o arquivo existir, ele é lido e seus dados são guardados em uma lista auxiliar
+            dadosold = Files.readAllLines(arquivo);
+            // o index recebe o tamanho da lista auxiliar
+            index = dadosold.size();
+            // printa os dados da lista auxiliar e atribui ao vetor principal
+                for (int i = 0; i < dadosold.size(); i++) {
+                    System.out.println(i + ": " + dadosold.get(i));
+                    cont++; // aumenta o cont para cada elemento ja existente no arquivo
+                    dados[i] = dadosold.get(i);
+                }
             System.out.println();
         }
         // Rotulo para o loop do programa
         Looping:
 
-        do {
+        do
+
+        {
             for (int i = index; i < 200; i++) {
                 try {
                     // leitura dos dados
@@ -110,14 +114,18 @@ public class LeituraDados {
         // Etapa final do programa, chamada das funções de atruibuição, print e gravação
         // do arquivo
         atribuir();
+
         print(dados);
-        Files.write(arquivo, mensagem.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        System.out.println(mensagem);
+        System.out.println(cont);
+        Files.write(arquivo, mensagem.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
     }
 
     // atribui os dados digitados a variavel mensagem
     public static void atribuir() {
         for (int i = 0; i < cont; i++) {
-            if (dados[i] != null && !(dados[i].equals("//FIM")) && !(dados[i].substring(0, dados[i].length() - 2).equals("//EDITAR"))) {
+            if (dados[i] != null && !(dados[i].equals("//FIM"))
+                    && !(dados[i].substring(0, dados[i].length() - 2).equals("//EDITAR"))) {
                 mensagem += dados[i] + "\n";
             }
         }
@@ -127,7 +135,8 @@ public class LeituraDados {
     public static void print(String[] vetor) {
         System.out.println();
         for (int i = 0; i < vetor.length; i++) {
-            if (vetor[i] != null && !(vetor[i].equals("//FIM")) && !(vetor[i].substring(0, dados[i].length() - 2).equals("//EDITAR"))) {
+            if (vetor[i] != null && !(vetor[i].equals("//FIM"))
+                    && !(vetor[i].substring(0, dados[i].length() - 2).equals("//EDITAR"))) {
                 System.out.println(i + ": " + vetor[i]);
             }
         }
