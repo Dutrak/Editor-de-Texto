@@ -60,6 +60,7 @@ public class LeituraDados {
                 try {
                     // leitura dos dados
                     dados[i] = e.entradaTexto("Entra o dado da linha " + i + ": ");
+                    
 
                     // verifica se o dado digitado é //FIM
                     if (dados[i].equals("//FIM")) {
@@ -68,9 +69,10 @@ public class LeituraDados {
                     }
 
                     // verifica se o dado digitado é //EDITAR
-                    else if (dados[i].substring(0, dados[i].length() - 2).equals("//EDITAR")) {
+                    else if (dados[i].substring(0, 8).equals("//EDITAR")) {
                         // pega o numero da linha digitada
-                        int posicao = Integer.parseInt(dados[i].substring(9));
+                        int posicao = Integer.parseInt(dados[i].substring(9, dados[i].length()));
+                        System.out.println(posicao);
 
                         // Verifica se a linha possui ja passou no looping de entrada
                         // caso a linha exista o conteudo é substituido pelo novo dado
@@ -124,8 +126,7 @@ public class LeituraDados {
     // atribui os dados digitados a variavel mensagem
     public static void atribuir() {
         for (int i = 0; i < cont; i++) {
-            if (dados[i] != null && !(dados[i].equals("//FIM"))
-                    && !(dados[i].substring(0, dados[i].length() - 2).equals("//EDITAR"))) {
+            if (dados[i] != null && !(dados[i].equals("//FIM")) && !(dados[i].startsWith("//EDITAR"))) {
                 mensagem += dados[i] + "\n";
             }
         }
@@ -135,8 +136,7 @@ public class LeituraDados {
     public static void print(String[] vetor) {
         System.out.println();
         for (int i = 0; i < vetor.length; i++) {
-            if (vetor[i] != null && !(vetor[i].equals("//FIM"))
-                    && !(vetor[i].substring(0, dados[i].length() - 2).equals("//EDITAR"))) {
+            if (vetor[i] != null && !(vetor[i].equals("//FIM")) && !(vetor[i].startsWith("//EDITAR"))){
                 System.out.println(i + ": " + vetor[i]);
             }
         }
