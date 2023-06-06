@@ -20,29 +20,39 @@ public class LeituraDados {
     public static int cont = 0;
     public static boolean erro = false;
     public static String[] dados = new String[200];
+    public static int index;
+    public static String[] dadosold = new String[200];
 
     public static void main(String[] args) throws Exception {
 
         // criação do arquivo de texto
-        arquivo = Paths.get("C:\\_dev\\Java\\ExercicioLeitura\\src\\arquivo.txt");
+        arquivo = Paths.get("arquivo.txt");
 
-        // verifica se o arquivo existe, se existir ele é deletado para ser criado
-        // novamente
-        if (Files.exists(arquivo)) {
-            Files.delete(arquivo);
-        }
-
-        // Cria o cabeçalho do exercicio
+        // printa o cabeçalho do programa
         System.out.println();
         System.out.println("CRIADOR DE ARQUIVOS DE TEXTO");
         System.out.println("COMANDOS: //FIM e //EDITAR");
         System.out.println();
 
+
+        // verifica se o arquivo existe
+        if (Files.exists(arquivo)){
+            // se o arquivo existir, ele é lido e seus dados são guardados em um vetor auxiliar
+            dadosold = Files.readAllLines(arquivo).toArray(new String[0]);
+            // o index recebe o tamanho do vetor auxiliar
+            index = dadosold.length;
+            // printa os dados do vetor auxiliar e atribui ao vetor de dados principais
+            for (int i = 0; i < dadosold.length; i++) {
+                System.out.println(i + ": " + dadosold[i]);
+                dados[i] = dadosold[i];
+            }
+            System.out.println();
+        }
         // Rotulo para o loop do programa
         Looping:
 
         do {
-            for (int i = 0; i < dados.length; i++) {
+            for (int i = index; i < 200; i++) {
                 try {
                     // leitura dos dados
                     dados[i] = e.entradaTexto("Entra o dado da linha " + i + ": ");
@@ -101,7 +111,7 @@ public class LeituraDados {
         // do arquivo
         atribuir();
         print(dados);
-        Files.write(arquivo, mensagem.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE_NEW);
+        Files.write(arquivo, mensagem.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
     // atribui os dados digitados a variavel mensagem
